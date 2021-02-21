@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.saas.TProLicenseDoMapper">
+  
+  <select id="getLicenseInfoBySupplierIdLicType" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.TProLicenseDo">
+    select id, lic_name licName, written_name writtenName, lic_no licNo, lic_type licType, lic_start_date licStartDate, lic_end_date licEndDate, lic_pic licPic, supplier_id supplierId, cer_source cerSource, relation_id relationId, reviewed, data_matching dataMatching, useing, occupation_range occupationRange, healthexamine_organization healthexamineOrganization, job_organization jobOrganization, inspect_institution inspectInstitution, certificate_type certificateType, certificate_no certificateNo, operation, give_lic_date giveLicDate, creator, create_time createTime, updater, last_update_time lastUpdateTime, stat, warn_flag warnFlag
+    from t_pro_license
+    where stat = 1 and supplier_id = #{supplierId} and lic_type = #{licType} limit 1
+  </select>
+  
+</mapper>

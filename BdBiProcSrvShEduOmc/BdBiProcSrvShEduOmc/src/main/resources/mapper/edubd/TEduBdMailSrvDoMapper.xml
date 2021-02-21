@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdMailSrvDoMapper"> 
+ 
+  <select id="getMailSrvInfoByUserName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdMailSrvDo">
+    select user_name userName, email, password, rcv_server rcvServer, rcv_srv_port rcvSrvPort, rcv_srv_port_no rcvSrvPortNo, send_server sendServer, send_srv_port sendSrvPort, send_srv_port_no sendSrvPortNo, stat
+    from t_edu_bd_mail_srv
+    where stat = 1 and user_name = #{userName}
+  </select>  
+  
+  <insert id="insertMailSrv" parameterType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdMailSrvDo">
+    insert into
+    t_edu_bd_mail_srv(id, user_name, email, password, rcv_server, rcv_srv_port, rcv_srv_port_no, send_server, send_srv_port, send_srv_port_no, stat)
+    values(#{id}, #{userName}, #{email}, #{password}, #{rcvServer}, #{rcvSrvPort}, #{rcvSrvPortNo}, #{sendServer}, #{sendSrvPort}, #{sendSrvPortNo}, #{stat})
+  </insert>  
+ 
+  <update id="updateEmail">
+    update t_edu_bd_mail_srv
+    set email = #{email}
+    where user_name = #{userName}
+  </update>
+  
+  <update id="updatePassword">
+    update t_edu_bd_mail_srv
+    set password = #{password}
+    where user_name = #{userName}
+  </update>
+  
+  <update id="updateRcvServer">
+    update t_edu_bd_mail_srv
+    set rcv_server = #{rcvServer}
+    where user_name = #{userName}
+  </update>
+  
+  <update id="updateRcvSrvPort">
+    update t_edu_bd_mail_srv
+    set rcv_srv_port = #{rcvSrvPort}
+    where user_name = #{userName}
+  </update>
+ 
+  <update id="updateRcvSrvPortNo">
+    update t_edu_bd_mail_srv
+    set rcv_srv_port_no = #{rcvSrvPortNo}
+    where user_name = #{userName}
+  </update>
+	
+  <update id="updateSendServer">
+    update t_edu_bd_mail_srv
+    set send_server = #{sendServer}
+    where user_name = #{userName}
+  </update>
+	
+  <update id="updateSendSrvPort">
+    update t_edu_bd_mail_srv
+    set send_srv_port = #{sendSrvPort}
+    where user_name = #{userName}
+  </update>
+	
+  <update id="updateSendSrvPortNo">
+    update t_edu_bd_mail_srv
+    set send_srv_port_no = #{sendSrvPortNo}
+    where user_name = #{userName}
+  </update>
+	
+  <update id="updateStat">
+    update t_edu_bd_mail_srv
+    set stat = #{stat}
+    where user_name = #{userName}
+  </update>
+  
+</mapper>

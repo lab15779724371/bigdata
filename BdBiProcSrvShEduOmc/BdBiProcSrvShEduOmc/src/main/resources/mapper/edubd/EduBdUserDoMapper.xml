@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.EduBdUserDoMapper">
+
+    <select id="findBdUser" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.EduBdUserDo">
+    SELECT
+		id,
+		user_account as userAccount,
+		safe_grade as safeGrade,
+		email,
+		fix_phone as fixPhone,
+		mobile_phone as mobilePhone,
+		name,
+		user_pic_url as userPicUrl,
+		is_admin as isAdmin,
+		role_id as roleId,
+		parent_id as parentId,
+		last_login_time as lastLoginTime,
+		creator,
+		create_time as createTime,
+		updater,
+		last_update_time as lastUpdateTime,
+		forbid,
+		token,
+		stat,
+		remarks,
+		org_id as orgId,
+		org_name as orgName,
+		fax
+	FROM
+		t_edu_bd_user
+	WHERE
+		stat = 1
+		and token = #{token}
+	limit 1
+  </select>
+
+  <select id="findBasicBdUser" resultType="com.tfit.BdBiProcSrvShEduOmc.model.vo.BasicBdUser">
+    SELECT
+		id,
+		user_account as userAccount,
+		name,
+		is_admin as isAdmin,
+		role_id as roleId,
+		parent_id as parentId,
+		token,
+		org_id as orgId,
+		org_name as orgName
+	FROM
+		t_edu_bd_user
+	WHERE
+		stat = 1
+		and token = #{token}
+	limit 1
+  </select>
+  
+  <select id="getAllUserInfos" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.EduBdUserDo">
+    select id, user_account userAccount, name, role_id, parent_id, forbid, stat, org_id orgId, org_name orgName,mobile_phone mobilePhone, email
+    from t_edu_bd_user
+    where stat = 1 
+    and user_type = #{userType}
+    <if test="id != null">
+        and id != #{id}
+    </if>
+  </select>
+  
+  <select id="getAllSubUserInfosByParentId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.EduBdUserDo">
+    select id, user_account userAccount, password, safe_grade safeGrade, email, fix_phone fixPhone, mobile_phone mobilePhone, name, user_pic_url userPicUrl, is_admin isAdmin, role_id roleId, parent_id parentId, last_login_time lastLoginTime, creator, create_time createTime, updater, last_update_time lastUpdateTime, forbid, token, stat, remarks, org_id orgId, org_name orgName, fax
+    from t_edu_bd_user
+    where stat = 1 
+    <if test="parentId != null">
+    	and parent_id = #{parentId} 
+    </if>
+    and user_type = #{userType}
+    <if test="orgId != null">
+        and org_id = #{orgId}
+    </if>
+  </select>
+  
+  <select id="getUserInfoByUserId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.EduBdUserDo">
+    select id, user_account userAccount, password, safe_grade safeGrade, email, fix_phone fixPhone, mobile_phone mobilePhone, name, user_pic_url userPicUrl, is_admin isAdmin, role_id roleId, parent_id parentId, last_login_time lastLoginTime, creator, create_time createTime, updater, last_update_time lastUpdateTime, forbid, token, stat, remarks, org_id orgId, org_name orgName, fax
+    from t_edu_bd_user
+    where stat = 1 and id = #{id}
+  </select>
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="IOT" packages="org.apache.logging.log4j.core,io.sentry.log4j2">
+  <Properties>
+    <Property name="project.name">BdBiProcSrvShEduOmc</Property>
+    <Property name="log.level.console">info</Property>
+    <Property name="log.level.root">info</Property>
+    <Property name="baseDir">/opt/logs/BdBiProcSrvShEduOmc</Property>
+    <!--<Property name="baseDir">/tmp/logs</Property>-->
+  </Properties>
+  <Appenders>
+    <Console name="CONSOLE" target="SYSTEM_OUT">
+      <ThresholdFilter level="${log.level.console}" onMatch="ACCEPT" onMismatch="DENY"></ThresholdFilter>
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %4p %t (%F:%L) - %m%n"></PatternLayout>
+    </Console>
+    <Sentry name="Sentry" />
+    <RollingFile name="ROLLING_FILE" ignoreExceptions="false" fileName="${baseDir}/${project.name}.log"
+          filePattern="${baseDir}/$${date:yyyy-MM}/${project.name}-%d{yyyy-MM-dd-HH}-%i.log.gz" append="true">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %4p %t (%F:%L) - %m%n" />
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+        <SizeBasedTriggeringPolicy size="16 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy fileIndex="nomax">
+        <Delete basePath="${baseDir}" maxDepth="2">
+          <IfFileName glob="*/${project.name}-*.log.gz">
+            <IfLastModified age="30d">
+              <IfAny>
+                <IfAccumulatedFileSize exceeds="100 GB" />
+                <IfAccumulatedFileCount exceeds="720" /><!--假设一天一小时一个,保留一个月日志测试 -->
+              </IfAny>
+            </IfLastModified>
+          </IfFileName>
+        </Delete>
+      </DefaultRolloverStrategy>
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+    <Root level="${log.level.root}">
+      <AppenderRef ref="CONSOLE"/>
+      <AppenderRef ref="ROLLING_FILE"/>
+      <appender-ref ref="Sentry" level="ERROR" />
+    </Root>
+  </Loggers>
+</Configuration>

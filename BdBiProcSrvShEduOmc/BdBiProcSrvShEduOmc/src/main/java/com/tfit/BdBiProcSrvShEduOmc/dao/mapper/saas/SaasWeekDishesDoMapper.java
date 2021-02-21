@@ -1,0 +1,10 @@
+package com.tfit.BdBiProcSrvShEduOmc.dao.mapper.saas;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface SaasWeekDishesDoMapper {
+	List<String> getAllSupplierId();
+}

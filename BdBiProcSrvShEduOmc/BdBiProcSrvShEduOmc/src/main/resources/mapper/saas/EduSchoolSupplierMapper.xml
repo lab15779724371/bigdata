@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.saas.EduSchoolSupplierMapper">
+
+    <!--查询某学校供应商信息-->
+    <select id="findSuppliersBySchoolId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.saas.EduSchoolSupplier">
+        SELECT
+        ss.school_id AS schoolId,
+        ss.supplier_id AS supplierId,
+        ps.supplier_name AS supplierName
+        FROM
+        t_edu_school_supplier ss
+        INNER JOIN t_pro_supplier ps
+        ON ss.supplier_id=ps.id
+        WHERE ss.stat=1
+        <!--学校编号-->
+        <if test="schoolId != null and schoolId != '' ">
+            AND ss.school_id = #{schoolId}
+        </if>
+        AND ps.stat=1
+
+    </select>
+    <!--查询所有可用供应商-->
+    <select id="findAllSuppliers" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.saas.EduSchoolSupplier">
+		SELECT
+		ss.school_id AS schoolId,
+		ss.supplier_id AS supplierId,
+		ps.supplier_name AS supplierName
+		FROM
+		t_edu_school_supplier ss
+		INNER JOIN t_pro_supplier ps
+		ON ss.supplier_id=ps.id
+		WHERE ss.stat=1 AND ps.stat=1
+
+	</select>
+
+    <!--查询团餐公司基础信息-->
+    <select id="findSupplierBasicById" resultType="com.tfit.BdBiProcSrvShEduOmc.model.vo.SupplierBasic">
+		SELECT
+		id AS supplierId,
+		supplier_name AS supplierName
+		FROM
+        t_pro_supplier
+		WHERE stat=1
+        <!--供应商编号-->
+        <if test="supplierId != null and supplierId != '' ">
+            AND id = #{supplierId}
+        </if>
+        limit 1
+
+	</select>
+
+    <!--查询团餐公司基本信息-->
+    <select id="findAllSupplierBasics" resultType="com.tfit.BdBiProcSrvShEduOmc.model.vo.SupplierBasic">
+        SELECT
+        id AS supplierId,
+        supplier_name AS supplierName
+        FROM
+        t_pro_supplier
+        WHERE stat=1
+
+	</select>
+
+</mapper>

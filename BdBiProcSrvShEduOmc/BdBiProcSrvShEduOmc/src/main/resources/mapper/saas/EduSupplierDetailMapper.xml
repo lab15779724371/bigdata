@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.saas.EduSupplierDetailMapper">
+<select id="getSupplierList" parameterType="com.tfit.BdBiProcSrvShEduOmc.obj.base.EduSupplierDetail" resultType="com.tfit.BdBiProcSrvShEduOmc.obj.base.EduSupplierDetail">
+   select 
+        id id, 
+          supplier_name supplierName, area area, address address, email email, 
+          contacts contacts, contact_way contactWay, qa_person qaPerson, qa_way qaWay, 
+          corporation corporation, corporation_way corporationWay, social_credit_code socialCreditCode, reg_capital regCapital, 
+          collect_total collectTotal, shipin_lic_name shipinLicName, shipin_lic_url shipinLicUrl, shipin_job_organization shipinJobOrganization, 
+          shipin_lic_no shipinLicNo, shipin_lic_start_date shipinLicStartDate, shipin_lic_end_date shipinLicEndDate, shipin_give_lic_date shipinGiveLicDate, 
+          yinye_lic_name yinyeLicName, yinye_lic_url yinyeLicUrl, yinye_job_organization yinyeJobOrganization, yinye_lic_no yinyeLicNo, 
+          yinye_lic_start_date yinyeLicStartDate, yinye_lic_end_date yinyeLicEndDate, yinye_give_lic_date yinyeGiveLicDate, yinye_zuce_address yinyeZuceAddress, 
+          yinye_address yinyeAddress, yinye_operate_address yinyeOperateAddress, yinye_operation yinyeOperation, shiwei_lic_name shiweiLicName, 
+          shiwei_lic_url shiweiLicUrl, shiwei_job_organization shiweiJobOrganization, shiwei_lic_no shiweiLicNo, shiwei_lic_start_date shiweiLicStartDate, 
+          shiwei_lic_end_date shiweiLicEndDate, shiwei_give_lic_date shiweiGiveLicDate, yunshu_lic_name yunshuLicName, yunshu_lic_url yunshuLicUrl, 
+          yunshu_job_organization yunshuJobOrganization, yunshu_lic_no yunshuLicNo, yunshu_lic_start_date yunshuLicStartDate, yunshu_lic_end_date yunshuLicEndDate, 
+          yunshu_give_lic_date yunshuGiveLicDate, ios_lic_name iosLicName, ios_lic_url iosLicUrl, ios_job_organization iosJobOrganization, 
+          ios_lic_no iosLicNo, ios_lic_start_date iosLicStartDate, ios_lic_end_date iosLicEndDate, ios_give_lic_date iosGiveLicDate, 
+          supplier_type supplierType 
+         from edu_supplier_detail 
+         where  1=1 
+			<if test="area != null">
+			  and area = #{area,jdbcType=VARCHAR}
+			</if>
+			<if test="supplierName != null">
+			  and supplier_name like "%"#{supplierName,jdbcType=VARCHAR}"%"
+			</if>
+			<if test="contacts != null">
+			  and contacts like "%"#{contacts,jdbcType=VARCHAR}"%"
+			</if>
+			<if test="shipinLicName != null">
+			  and shipin_lic_name like "%"#{shipinLicName,jdbcType=VARCHAR}"%"
+			</if>
+			<if test="socialCreditCode != null">
+			  and social_credit_code like "%"#{socialCreditCode,jdbcType=VARCHAR}"%"
+			</if>
+			<if test="regCapital != null">
+			  and reg_capital like "%"#{regCapital,jdbcType=VARCHAR}"%"
+			</if>
+  </select>
+
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdUserLableRelationMapper">
+  <resultMap id="BaseResultMap" type="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdUserLableRelationObj">
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="lable_id" jdbcType="INTEGER" property="lableId" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+    <result column="last_update_time" jdbcType="VARCHAR" property="lastUpdateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id userId, lable_id lableId, creator, create_time createTime, updater, last_update_time lastUpdateTime 
+  </sql>
+  <delete id="deleteByPrimaryKey">
+    delete from t_edu_bd_user_lable_relation
+    where 1 =1 
+     <if test="userId != null">
+        and user_id = #{userId,jdbcType=VARCHAR} 
+      </if>
+      <if test="lableId != null">
+        and lable_id = #{lableId,jdbcType=INTEGER} 
+      </if>
+  </delete>
+  <insert id="insert" parameterType="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdUserLableRelationObj">
+    insert into t_edu_bd_user_lable_relation (user_id, lable_id, 
+      creator, create_time, updater, 
+      last_update_time)
+    values (#{userId,jdbcType=VARCHAR}, #{lableId,jdbcType=INTEGER}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, 
+      #{lastUpdateTime,jdbcType=VARCHAR})
+  </insert>
+    <select id="selectList"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_edu_bd_address_lable
+    where 1 = 1 
+      <if test="lable.lableName != null">
+         and lable_name like "%"#{lable.lableName,jdbcType=VARCHAR}"%" 
+      </if>
+      <if test="lable.stat != null">
+         and stat = #{lable.stat,jdbcType=INTEGER} 
+      </if>
+      <if test="lable.remark != null">
+         and remark = #{lable.remark,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.creator != null">
+         and creator = #{lable.creator,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.createTime != null">
+         and create_time = #{lable.createTime,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.updater != null">
+         and updater = #{lable.updater,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.lastUpdateTime != null">
+        and last_update_time =  #{lable.lastUpdateTime,jdbcType=VARCHAR} 
+      </if>
+      <if test="startNum != null">
+      limit #{startNum} ,#{pageSize} 
+      </if>
+  </select>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdUserLableRelationObj">
+    update t_edu_bd_user_lable_relation
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="lableId != null">
+        lable_id = #{lableId,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+      <delete id="deleteByLableId" parameterType="java.lang.Integer">
+    delete from t_edu_bd_user_lable_relation
+    where lable_id = #{lableId,jdbcType=INTEGER}
+  </delete>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdFoodSafetyGradeDoMapper">
+  
+  <select id="getAllTEduBdFoodSafetyGradeDos" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdFoodSafetyGradeDo">
+    select id, dist_name distName, pp_name ppName, lic_no licNo, pp_address ppAddress, insp_date inspDate, level_name levelName, stat
+    from t_edu_bd_food_safety_grade
+    where stat = 1
+  </select> 
+  
+  <select id="getTEduBdFoodSafetyGradeDoByDistName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdFoodSafetyGradeDo">
+    select id, dist_name distName, pp_name ppName, lic_no licNo, pp_address ppAddress, insp_date inspDate, level_name levelName, stat
+    from t_edu_bd_food_safety_grade
+    where stat = 1 and dist_name = #{distName}
+  </select>
+  
+</mapper>

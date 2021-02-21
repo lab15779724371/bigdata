@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edu.TEduSchoolDoMapper"> 
+ 
+  <select id="getSchIdListByDs1" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.SchIdNameDo">
+    select distinct id, school_name
+    from t_edu_school
+    where stat = 1 and reviewed = 1
+  </select>
+  
+  <select id="getSchIdListByDs1DistId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.SchIdNameDo">
+    select distinct id, school_name
+    from t_edu_school
+    where stat = 1 and reviewed = 1 and area = #{distId}
+  </select>
+  
+</mapper>

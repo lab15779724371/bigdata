@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edu.EduSchoolExtMapper">
+
+    <select id="findAllSchools" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edu.EduSchool">
+    SELECT DISTINCT
+	id,
+	school_name as schoolName,
+	address,
+	area,
+	LEVEL as level,
+	school_nature as schoolNature,
+	canteen_mode as canteenMode,
+	ledger_type as ledgerType,
+	level2,
+	parent_id as parentId,
+	license_main_type as licenseMainType,
+	license_main_child as licenseMainChild,
+	school_area_id as schoolAreaId,
+	department_master_id as departmentMasterId,
+	department_slave_id as departmentSlaveId,
+	department_head as depHeadName ,
+	department_mobilephone as dhnMobilePhone 
+	FROM
+		t_edu_school
+	WHERE
+		stat = 1 
+		and reviewed = 1
+  </select>
+
+</mapper>

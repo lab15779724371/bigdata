@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdNoticeStatusDoMapper"> 
+ 
+  <insert id="insertMsgNoticeStatus" parameterType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdNoticeStatusDo">
+    insert into
+    t_edu_bd_notice_status(create_time, bulletin_id, owner_user_name, rcv_user_name, read_count, sign_flag, last_update_time, stat)
+    values(#{createTime}, #{bulletinId}, #{ownerUserName}, #{rcvUserName}, #{readCount}, #{signFlag}, #{lastUpdateTime}, #{stat})
+  </insert>
+  
+  <select id="getMsgNoticeStatusByRcvUserName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdNoticeStatusDo">
+    select id, create_time createTime, bulletin_id bulletinId, owner_user_name ownerUserName, rcv_user_name rcvUserName, read_count readCount, sign_flag signFlag, last_update_time lastUpdateTime
+    from t_edu_bd_notice_status
+    where stat = 1 and rcv_user_name = #{rcvUserName}
+  </select>
+  
+  <select id="getMsgNoticeStatusBySendUserName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdNoticeStatusDo">
+    select id, create_time createTime, bulletin_id bulletinId, owner_user_name ownerUserName, rcv_user_name rcvUserName, read_count readCount, sign_flag signFlag, last_update_time lastUpdateTime
+    from t_edu_bd_notice_status
+    where stat = 1 and owner_user_name = #{sendUserName}
+  </select>
+  
+  <select id="getMsgNoticeStatusBybIdSendUser" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdNoticeStatusDo">
+    select id, create_time createTime, bulletin_id bulletinId, owner_user_name ownerUserName, rcv_user_name rcvUserName, read_count readCount, sign_flag signFlag, last_update_time lastUpdateTime
+    from t_edu_bd_notice_status
+    where stat = 1 and bulletin_id = #{bulletinId} and owner_user_name = #{sendUserName}
+  </select>  
+  
+  <select id="getMsgNoticeStatusBybIdRcvUserName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdNoticeStatusDo">
+    select id, create_time createTime, bulletin_id bulletinId, owner_user_name ownerUserName, rcv_user_name rcvUserName, read_count readCount, sign_flag signFlag, last_update_time lastUpdateTime
+    from t_edu_bd_notice_status
+    where stat = 1 and bulletin_id = #{bulletinId} and rcv_user_name = #{rcvUserName}
+  </select>
+  
+  <update id="updateReadCountInMsgNotice">
+    update t_edu_bd_notice_status
+    set read_count = #{readCount}
+    where stat = 1 and bulletin_id = #{bulletinId} and rcv_user_name = #{rcvUserName}
+  </update>
+  
+  <update id="updateSignFlagByTEduBdNoticeStatusDo">
+    UPDATE 
+        t_edu_bd_notice_status
+    SET 
+        sign_flag = #{signFlag}
+    WHERE 
+        stat = 1 and bulletin_id = #{bulletinId} and owner_user_name = #{ownerUserName} and rcv_user_name = #{rcvUserName}
+  </update>
+  
+</mapper>

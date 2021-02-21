@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.saas.TProSupplierDoMapper">
+  
+  <select id="getIdSupplierIdName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.TProSupplierDo">
+    select distinct id, supplier_name supplierName
+    from t_pro_supplier
+    where stat = 1
+    order by id asc
+  </select>
+  
+  <select id="getSupplierNameBySupplierId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.TProSupplierDo">
+    select id, supplier_name supplierName
+    from t_pro_supplier
+    where id = #{supplierId} and stat = 1
+  </select>
+  
+  <select id="getRmcIdName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.TProSupplierDo">
+    select distinct id, supplier_name supplierName
+    from t_pro_supplier
+    where (supplier_type = 1 or supplier_type is null) and stat = 1
+    order by id asc
+  </select>
+  
+  <select id="getAllMatSupplierIdName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.TProSupplierDo">
+    select distinct id,supplier_name supplierName
+    from t_pro_supplier
+    where supplier_type = 2 <!-- and audit_state = 3 目前审核状态有点乱，暂时去除，防止下拉列表没有数据-->
+    order by id asc
+  </select>
+  
+</mapper>

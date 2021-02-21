@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdExamPaperDoMapper"> 
+ 
+  <select id="getAllTEduBdExamPaperDo" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdExamPaperDo">
+    select id, create_time createTime, name, title, remark, category, last_update_time lastUpdateTime, stat
+    from t_edu_bd_exam_paper
+    where stat = 1
+  </select>
+  
+  <select id="getTEduBdExamPaperDoById" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdExamPaperDo">
+    select id, create_time createTime, name, title, remark, category, last_update_time lastUpdateTime, stat
+    from t_edu_bd_exam_paper
+    where stat = 1 and id = #{id}
+    limit 1
+  </select>
+  
+</mapper>

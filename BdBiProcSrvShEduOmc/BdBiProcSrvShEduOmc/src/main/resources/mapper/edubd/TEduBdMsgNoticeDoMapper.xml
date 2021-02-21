@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdMsgNoticeDoMapper"> 
+ 
+  <insert id="insertMsgNotice" parameterType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdMsgNoticeDo">
+    insert into
+    t_edu_bd_msg_notice(id, create_time, receiver, title, announce_type, ann_cont, am_info, user_name, am_flag, last_update_time, stat)
+    values(#{id}, #{createTime}, #{receiver}, #{title}, #{announceType}, #{annCont}, #{amInfo}, #{userName}, #{amFlag}, #{lastUpdateTime}, #{stat})
+  </insert>  
+  
+  <select id="getMsgNoticeById" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdMsgNoticeDo">
+    select id, create_time createTime, receiver, title, announce_type announceType, ann_cont annCont, am_info amInfo, user_name userName, am_flag amFlag, last_update_time, stat
+    from t_edu_bd_msg_notice
+    where stat = 1 and id = #{id}
+  </select>
+  
+  <select id="getPreMsgNoticeById" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdMsgNoticeDo">
+    select id, create_time createTime, receiver, title, announce_type announceType, ann_cont annCont, am_info amInfo, user_name userName, am_flag amFlag, last_update_time, stat
+    from t_edu_bd_msg_notice
+    where stat = 1 and strcmp(id, #{id}) = -1 order by create_time desc limit 1
+  </select>
+  
+  <select id="getNextMsgNoticeById" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdMsgNoticeDo">
+    select id, create_time createTime, receiver, title, announce_type announceType, ann_cont annCont, am_info amInfo, user_name userName, am_flag amFlag, last_update_time, stat
+    from t_edu_bd_msg_notice
+    where stat = 1 and strcmp(id, #{id}) = 1 order by create_time desc limit 1
+  </select>
+  
+  <select id="getPreMsgNoticeByIdRcvUserName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdMsgNoticeDo">
+    select id, create_time createTime, receiver, title, announce_type announceType, ann_cont annCont, am_info amInfo, user_name userName, am_flag amFlag, last_update_time, stat
+    from t_edu_bd_msg_notice
+    where stat = 1 and receiver like #{rcvUserName} and strcmp(id, #{id}) = -1 order by create_time desc limit 1
+  </select>	
+  
+  <select id="getNextMsgNoticeByIdRcvUserName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdMsgNoticeDo">
+    select id, create_time createTime, receiver, title, announce_type announceType, ann_cont annCont, am_info amInfo, user_name userName, am_flag amFlag, last_update_time, stat
+    from t_edu_bd_msg_notice
+    where stat = 1 and receiver like #{rcvUserName} and strcmp(id, #{id}) = 1 order by create_time desc limit 1
+  </select>    
+  
+  <select id="getPreMsgNoticeByIdSendUserName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdMsgNoticeDo">
+    select id, create_time createTime, receiver, title, announce_type announceType, ann_cont annCont, am_info amInfo, user_name userName, am_flag amFlag, last_update_time, stat
+    from t_edu_bd_msg_notice
+    where stat = 1 and user_name = #{sendUserName} and strcmp(id, #{id}) = -1 order by create_time desc limit 1
+  </select>	
+  
+  <select id="getNextMsgNoticeByIdSendUserName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdMsgNoticeDo">
+    select id, create_time createTime, receiver, title, announce_type announceType, ann_cont annCont, am_info amInfo, user_name userName, am_flag amFlag, last_update_time, stat
+    from t_edu_bd_msg_notice
+    where stat = 1 and user_name = #{sendUserName} and strcmp(id, #{id}) = 1 order by create_time desc limit 1
+  </select>  
+  
+</mapper>

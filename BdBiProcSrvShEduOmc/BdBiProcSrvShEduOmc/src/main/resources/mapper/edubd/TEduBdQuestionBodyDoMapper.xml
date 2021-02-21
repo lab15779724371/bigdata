@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdQuestionBodyDoMapper"> 
+ 
+  <select id="getTEduBdQuestionBodyDoById" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdQuestionBodyDo">
+    select id, create_time, body, question_type, last_update_time, stat
+    from t_edu_bd_question_body
+    where stat = 1 and id = #{id}
+    limit 1
+  </select>
+  
+</mapper>

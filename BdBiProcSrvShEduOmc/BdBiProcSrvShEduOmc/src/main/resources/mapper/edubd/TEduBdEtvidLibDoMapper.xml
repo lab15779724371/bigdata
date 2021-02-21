@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdEtvidLibDoMapper"> 
+ 
+  <insert id="insertTEduBdEtvidLibDo" parameterType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdEtvidLibDo">
+    insert into
+    t_edu_bd_etvid_lib(id, create_time, vid_name, sub_title, vid_category, thumb_url, vid_url, vid_descr_cont, user_name, audit_status, last_update_time, stat)
+    values(#{id}, #{createTime}, #{vidName}, #{subTitle}, #{vidCategory}, #{thumbUrl}, #{vidUrl}, #{vidDescrCont}, #{userName}, #{auditStatus}, #{lastUpdateTime}, #{stat})
+  </insert>
+  
+  <select id="getTEduBdEtvidLibDoById" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdEtvidLibDo">
+    select id, create_time createTime, vid_name vidName, sub_title subTitle, vid_category vidCategory, thumb_url thumbUrl, vid_url vidUrl, vid_descr_cont vidDescrCont, user_name userName, audit_status auditStatus, last_update_time lastUpdateTime, stat
+    from t_edu_bd_etvid_lib
+    where stat = 1 and id = #{id}
+    limit 1
+  </select>
+  
+  <select id="getAllTEduBdEtvidLibDos" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdEtvidLibDo">
+    select id, create_time createTime, vid_name vidName, sub_title subTitle, vid_category vidCategory, thumb_url thumbUrl, vid_url vidUrl, vid_descr_cont vidDescrCont, user_name userName, audit_status auditStatus, last_update_time lastUpdateTime, stat
+    from t_edu_bd_etvid_lib
+    where stat = 1
+  </select>  
+  
+  <select id="getTEduBdEtvidLibDosByCreateTime" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdEtvidLibDo">
+    select id, create_time createTime, vid_name vidName, sub_title subTitle, vid_category vidCategory, thumb_url thumbUrl, vid_url vidUrl, vid_descr_cont vidDescrCont, user_name userName, audit_status auditStatus, last_update_time lastUpdateTime, stat
+    from t_edu_bd_etvid_lib
+    where stat = 1 and create_time between #{startTime} and #{endTime}
+  </select>
+  
+  <update id="updateVidNameByTEduBdEtvidLibDo">
+    UPDATE 
+        t_edu_bd_etvid_lib
+    SET 
+        vid_name = #{vidName}
+    WHERE 
+        stat = 1 and id = #{id}
+  </update>
+	
+  <update id="updateSubTitleByTEduBdEtvidLibDo">
+    UPDATE 
+        t_edu_bd_etvid_lib
+    SET 
+        sub_title = #{subTitle}
+    WHERE 
+        stat = 1 and id = #{id}
+  </update>	
+	
+  <update id="updateVidCategoryByTEduBdEtvidLibDo">
+    UPDATE 
+        t_edu_bd_etvid_lib
+    SET 
+        vid_category = #{vidCategory}
+    WHERE 
+        stat = 1 and id = #{id}
+  </update>
+
+  <update id="updateThumbUrlByTEduBdEtvidLibDo">
+    UPDATE 
+        t_edu_bd_etvid_lib
+    SET 
+        thumb_url = #{thumbUrl}
+    WHERE 
+        stat = 1 and id = #{id}
+  </update>
+	
+  <update id="updateVidUrlByTEduBdEtvidLibDo">
+    UPDATE 
+        t_edu_bd_etvid_lib
+    SET 
+        vid_url = #{vidUrl}
+    WHERE 
+        stat = 1 and id = #{id}
+  </update>
+	
+  <update id="updateVidDescrContByTEduBdEtvidLibDo">
+    UPDATE 
+        t_edu_bd_etvid_lib
+    SET 
+        vid_descr_cont = #{vidDescrCont}
+    WHERE 
+        stat = 1 and id = #{id}
+  </update>
+	
+  <update id="updateLastUpdateTimeByTEduBdEtvidLibDo">
+    UPDATE 
+        t_edu_bd_etvid_lib
+    SET 
+        last_update_time = #{lastUpdateTime}
+    WHERE 
+        stat = 1 and id = #{id}
+  </update>
+  
+  <delete id="deleteTEduBdEtvidLibDoById">
+    delete from t_edu_bd_etvid_lib
+    where id = #{id}
+  </delete>
+  
+</mapper>

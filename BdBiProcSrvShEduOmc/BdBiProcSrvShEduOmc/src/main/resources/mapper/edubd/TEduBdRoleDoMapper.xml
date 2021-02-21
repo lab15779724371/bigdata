@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdRoleDoMapper">
+
+    <select id="getBdRoleInfoByRoleName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.TEduBdRoleDo">
+    SELECT
+	id, 
+	role_type, 
+	role_name, 
+	create_time, 
+	last_update_time, 
+	discrip, 
+	stat
+	FROM
+		t_edu_bd_role
+	WHERE
+		stat = 1 and role_type = #{roleType} and role_name = #{roleName}
+  </select>
+
+</mapper>

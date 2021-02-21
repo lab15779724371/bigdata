@@ -1,0 +1,45 @@
+stages:
+  - build_pro
+
+variables:
+ # CI_DEBUG_TRACE: "true"
+# 镜像服务器名
+  REGISTRY_SERVER: image.tfit.com
+# 仓库的路径名
+  REGISTRY_PATH:  $CI_PROJECT_PATH
+# 仓库名，要与代码的根目录相同
+  REGISTRY_NAME: $CI_PROJECT_NAME
+# 应用的板本号
+  REGISTRY_TAG: $CI_BUILD_REF_NAME
+# 在workpace内创建的目录名
+  CACHE_DIR: cache_dir
+
+# 克隆目录
+  BUILD_HOME: $CI_PROJECT_DIR
+
+# jar包名称
+  JAR_NAME: BdBiProcSrvShEduOmc-0.0.1-SNAPSHOT.jar
+
+
+# 生产 编译
+build_pro:
+  stage: build_pro
+  only:
+    - /.*-R/
+  before_script:
+    - GROUP=${REGISTRY_PATH#*/};
+    - mkdir -p /build/binary/${GROUP}/${REGISTRY_TAG};
+    - APP_PATH=/build/binary/${GROUP}/${REGISTRY_TAG};
+    - echo ${APP_PATH};
+    - java -version;
+    - mvn --version;
+  script:
+    - ls;
+    - git checkout ${REGISTRY_TAG};
+    - git show HEAD > ${APP_PATH}/HEAD.md
+    - cd BdBiProcSrvShEduOmc;
+    - rm -rf target;
+    - mvn clean package install -U --settings /opt/maven_conf/bigData.xml -Dmaven-nexus-snapshots-url=http://nexus.tfit.com/repository/maven-public/
+    - cp -f ${CI_PROJECT_DIR}/BdBiProcSrvShEduOmc/target/${JAR_NAME} ${APP_PATH};
+    - md5sum ${APP_PATH}/${JAR_NAME} > ${APP_PATH}/${JAR_NAME}.md5 ;
+    - ls ${APP_PATH};

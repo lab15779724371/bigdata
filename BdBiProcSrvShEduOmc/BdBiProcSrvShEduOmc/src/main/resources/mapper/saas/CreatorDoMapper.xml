@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.saas.CreatorDoMapper">
+    
+  <select id="getCreatorBySupplierId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.CreatorDo">
+    select creator, use_date, create_time, last_update_time, is_history
+    from t_saas_week_dishes_tmp
+    where supplier_id = #{strSupplierId}
+    order by create_time ASC
+  </select>
+  
+</mapper>

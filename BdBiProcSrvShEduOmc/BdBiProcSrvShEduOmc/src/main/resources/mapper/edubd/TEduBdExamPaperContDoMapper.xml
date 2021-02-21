@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdExamPaperContDoMapper"> 
+ 
+  <select id="getTEduBdExamPaperContDosByEpId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdExamPaperContDo">
+    select id, create_time createTime, ep_id epId, question_id questionId, score, question_type questionType, last_update_time lastUpdateTime, stat
+    from t_edu_bd_exam_paper_cont
+    where stat = 1 and ep_id = #{epId}
+  </select>
+  
+</mapper>

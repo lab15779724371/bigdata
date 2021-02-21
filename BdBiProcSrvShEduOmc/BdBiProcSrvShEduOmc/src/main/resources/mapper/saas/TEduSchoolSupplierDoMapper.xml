@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.saas.TEduSchoolSupplierDoMapper">
+  
+  <select id="getSupplierIdSchoolName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.TEduSchoolSupplierDo">
+    select supplier_id supplierId, school_name schoolName
+    from t_edu_school_supplier and stat = 1
+  </select>
+  
+  <select id="getSupplierIdSchoolId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.TEduSchoolSupplierDo">
+    select supplier_id supplierId, school_name schoolName
+    from t_edu_school_supplier
+    where school_id = #{schoolId} and stat = 1
+  </select>
+  
+  <select id="getAllSupplierIdSchoolId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.TEduSchoolSupplierDo">
+    select school_id schoolId, supplier_id supplierId
+    from t_edu_school_supplier
+    where stat = 1
+  </select>
+  
+  <select id="getAllIdSupplierIdSchoolId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.TEduSchoolSupplierDo">
+    select id, school_id schoolId, supplier_id supplierId
+    from t_edu_school_supplier
+    where 1=1 
+    <if test="stat != null and stat != '' ">
+            AND stat = #{stat}
+    </if>
+  </select>
+  
+</mapper>

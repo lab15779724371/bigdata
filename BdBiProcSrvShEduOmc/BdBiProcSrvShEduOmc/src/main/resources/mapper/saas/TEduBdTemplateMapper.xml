@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.saas.TEduBdTemplateMapper">
+  <resultMap id="BaseResultMap" type="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdTemplate">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="template_type" jdbcType="INTEGER" property="templateType" />
+    <result column="template_obj" jdbcType="VARCHAR" property="templateObj" />
+    <result column="template_content" jdbcType="VARCHAR" property="templateContent" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+    <result column="last_update_time" jdbcType="VARCHAR" property="lastUpdateTime" />
+    <result column="am_info" jdbcType="VARCHAR" property="amInfo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, template_type, template_obj, creator, create_time, updater, 
+    last_update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdTemplate">
+    select 
+        id, template_type templateType, template_obj templateObj, template_content annCont, creator, create_time createTime, updater, 
+    last_update_time lastUpdateTime,am_info amInfo 
+    from t_edu_bd_template
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAllList"  resultMap="BaseResultMap">
+    select 
+       <include refid="Base_Column_List" />
+    from t_edu_bd_template 
+    order by template_type
+  </select>
+  <select id="selectMaxIdList"  resultType="java.lang.Integer">
+    select 
+      max(Id)
+    from t_edu_bd_template 
+  </select>
+  <select id="selectByTemplate" parameterType="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdTemplate" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_edu_bd_template
+    where template_type = #{templateType,jdbcType=INTEGER}
+      and template_obj = #{templateObj,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_edu_bd_template
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdTemplate">
+    insert into t_edu_bd_template (id, template_type, template_obj, 
+      template_content, creator, create_time, 
+      updater, last_update_time,am_info)
+    values (#{id,jdbcType=VARCHAR}, #{templateType,jdbcType=INTEGER}, #{templateObj,jdbcType=VARCHAR}, 
+      #{templateContent,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=VARCHAR},#{amInfo})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdTemplate">
+    insert into t_edu_bd_template
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="templateType != null">
+        template_type,
+      </if>
+      <if test="templateObj != null">
+        template_obj,
+      </if>
+      <if test="templateContent != null">
+        template_content,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="templateType != null">
+        #{templateType,jdbcType=INTEGER},
+      </if>
+      <if test="templateObj != null">
+        #{templateObj,jdbcType=VARCHAR},
+      </if>
+      <if test="templateContent != null">
+        #{templateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdTemplate">
+    update t_edu_bd_template
+    <set>
+      <if test="templateType != null">
+        template_type = #{templateType,jdbcType=INTEGER},
+      </if>
+      <if test="templateObj != null">
+        template_obj = #{templateObj,jdbcType=VARCHAR},
+      </if>
+      <if test="templateContent != null">
+        template_content = #{templateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdTemplate">
+    update t_edu_bd_template
+    set template_type = #{templateType,jdbcType=INTEGER},
+      template_obj = #{templateObj,jdbcType=VARCHAR},
+      template_content = #{templateContent,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=VARCHAR},
+      am_info = #{amInfo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

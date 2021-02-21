@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.saas.ProRecyclerSupplierMapper">
+
+    <!--查询某学校回收单位信息-->
+    <select id="findProRecyclerSuppliersBySchoolId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.saas.ProRecyclerSupplier">
+        SELECT
+        id,
+        source_id AS sourceId,
+        type,
+        supplier_name AS supplierName,
+        address,
+        contacts,
+        telephone
+        FROM t_pro_recycler_supplier
+        WHERE stat=1
+        <!--学校编号-->
+        <if test="schoolId != null and schoolId != '' ">
+            AND source_id = #{schoolId}
+        </if>
+
+    </select>
+
+    <!--查询所有可用回收单位-->
+    <select id="findAllProRecyclerSuppliers" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.saas.ProRecyclerSupplier">
+        SELECT
+            id,
+            source_id AS sourceId,
+            type,
+            supplier_name AS supplierName,
+            address,
+            contacts,
+            telephone
+        FROM t_pro_recycler_supplier
+        WHERE stat=1
+
+	</select>
+
+</mapper>

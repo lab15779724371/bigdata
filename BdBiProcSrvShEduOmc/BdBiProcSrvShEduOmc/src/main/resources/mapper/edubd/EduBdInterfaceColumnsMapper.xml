@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.EduBdInterfaceColumnsMapper">
+  <resultMap id="BaseResultMap" type="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.EduBdInterfaceColumnsDo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="interface_name" jdbcType="VARCHAR" property="interfaceName" />
+    <result column="columns" jdbcType="VARCHAR" property="columns" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, interface_name, columns, creator,create_time,last_update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_edu_bd_interface_columns
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByInterfaceName" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_edu_bd_interface_columns
+    where interface_name = #{interfaceName,jdbcType=VARCHAR}
+      and creator = #{userId,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_edu_bd_interface_columns
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.EduBdInterfaceColumnsDo">
+    insert into t_edu_bd_interface_columns (id, interface_name, columns, 
+      creator, create_time, last_update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{interfaceName,jdbcType=VARCHAR}, #{columns,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.EduBdInterfaceColumnsDo">
+    insert into t_edu_bd_interface_columns
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="interface_name != null">
+        interface_name,
+      </if>
+      <if test="columns != null">
+        columns,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="last_update_time != null">
+        last_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="interface_name != null">
+        #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="columns != null">
+        #{columns,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="last_update_time != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.EduBdInterfaceColumnsDo">
+    update t_edu_bd_interface_columns
+    <set>
+      <if test="interface_name != null">
+        interface_name = #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="columns != null">
+        columns = #{columns,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="last_update_time != null">
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.EduBdInterfaceColumnsDo">
+    update t_edu_bd_interface_columns
+    set interface_name = #{interfaceName,jdbcType=VARCHAR},
+      columns = #{columns,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectMaxId" resultType="java.lang.Integer">
+    select max(id) 
+    from t_edu_bd_interface_columns
+  </select>
+  
+</mapper>

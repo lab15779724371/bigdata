@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdAddressLableMapper">
+  <resultMap id="BaseResultMap" type="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdAddressLableObj">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="lable_name" jdbcType="VARCHAR" property="lableName" />
+    <result column="stat" jdbcType="INTEGER" property="stat" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+    <result column="last_update_time" jdbcType="VARCHAR" property="lastUpdateTime" />
+    <result column="user_count" jdbcType="VARCHAR" property="userCount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, lable_name , stat, remark, creator, create_time, updater, last_update_time 
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_edu_bd_address_lable
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectList"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_edu_bd_address_lable
+    where 1 = 1 
+	  <if test="lable.id != null">
+        and id = #{lable.id,jdbcType=INTEGER} 
+      </if>
+      <if test="lable.lableName != null">
+         and lable_name like "%"#{lable.lableName,jdbcType=VARCHAR}"%" 
+      </if>
+      <if test="lable.stat != null">
+         and stat = #{lable.stat,jdbcType=INTEGER} 
+      </if>
+      <if test="lable.remark != null">
+         and remark = #{lable.remark,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.creator != null">
+         and creator = #{lable.creator,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.createTime != null">
+         and create_time = #{lable.createTime,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.updater != null">
+         and updater = #{lable.updater,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.lastUpdateTime != null">
+        and last_update_time =  #{lable.lastUpdateTime,jdbcType=VARCHAR} 
+      </if>
+      <if test="startNum != null">
+      limit #{startNum} ,#{pageSize} 
+      </if>
+  </select>
+  <select id="selectListAndUserCount"  resultMap="BaseResultMap">
+    select max(l.lable_name) lable_name,max(l.id) id,max(l.stat) stat, max(l.remark)remark, max(l.creator) creator,
+		max( l.create_time) create_time, max(l.updater) updater, max(l.last_update_time) last_update_time, count(r.user_id) user_count
+    from t_edu_bd_address_lable l
+		left join t_edu_bd_user_lable_relation r on l.id = r.lable_id
+    where 1 = 1 
+	  <if test="lable.id != null">
+        and id = #{lable.id,jdbcType=INTEGER} 
+      </if>
+      <if test="lable.lableName != null">
+         and lable_name like "%"#{lable.lableName,jdbcType=VARCHAR}"%" 
+      </if>
+      <if test="lable.stat != null">
+         and stat = #{lable.stat,jdbcType=INTEGER} 
+      </if>
+      <if test="lable.remark != null">
+         and remark = #{lable.remark,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.creator != null">
+         and creator = #{lable.creator,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.createTime != null">
+         and create_time = #{lable.createTime,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.updater != null">
+         and updater = #{lable.updater,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.lastUpdateTime != null">
+        and last_update_time =  #{lable.lastUpdateTime,jdbcType=VARCHAR} 
+      </if>
+        group by l.id
+		order by l.create_time 
+      <if test="startNum != null">
+      limit #{startNum} ,#{pageSize} 
+      </if>
+  </select>
+  <select id="selectListCount" resultType="java.lang.Integer">
+    select count(*) 
+    from t_edu_bd_address_lable
+     where 1 = 1 
+	  <if test="lable.id != null">
+        and id = #{lable.id,jdbcType=INTEGER} 
+      </if>
+      <if test="lable.lableName != null">
+         and lable_name like "%"#{lable.lableName,jdbcType=VARCHAR}"%" 
+      </if>
+      <if test="lable.stat != null">
+         and stat = #{lable.stat,jdbcType=INTEGER} 
+      </if>
+      <if test="lable.remark != null">
+         and remark = #{lable.remark,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.creator != null">
+         and creator = #{lable.creator,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.createTime != null">
+         and create_time = #{lable.createTime,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.updater != null">
+         and updater = #{lable.updater,jdbcType=VARCHAR} 
+      </if>
+      <if test="lable.lastUpdateTime != null">
+        and last_update_time =  #{lable.lastUpdateTime,jdbcType=VARCHAR} 
+      </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_edu_bd_address_lable
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdAddressLableObj">
+    insert into t_edu_bd_address_lable (id, lable_name, stat, 
+      remark, creator, create_time, 
+      updater, last_update_time)
+    values (#{id,jdbcType=INTEGER}, #{lableName,jdbcType=VARCHAR}, #{stat,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tfit.BdBiProcSrvShEduOmc.obj.base.TEduBdAddressLableObj">
+    update t_edu_bd_address_lable
+    <set>
+      <if test="lableName != null">
+        lable_name = #{lableName,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null">
+        stat = #{stat,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectMaxId" resultType="java.lang.Integer">
+    select max(id) 
+    from t_edu_bd_address_lable
+  </select>
+</mapper>

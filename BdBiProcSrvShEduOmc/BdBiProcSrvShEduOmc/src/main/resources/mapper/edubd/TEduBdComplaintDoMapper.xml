@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdComplaintDoMapper"> 
+ 
+  <insert id="insertTEduBdComplaintDo" parameterType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdComplaintDo">
+    insert into
+    t_edu_bd_complaint(id, create_time, sub_date, school_id, title, content, cpt_name, contact_no, contractor, cp_status, feed_back, finish_date, user_name, last_update_time, stat)
+    values(#{id}, #{createTime}, #{subDate}, #{schoolId}, #{title}, #{content}, #{cptName}, #{contactNo}, #{contractor}, #{cpStatus}, #{feedBack}, #{finishDate}, #{userName}, #{lastUpdateTime}, #{stat})
+  </insert>
+  
+  <select id="getTEduBdComplaintDoById" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdComplaintDo">
+    select id, create_time createTime, sub_date subDate, school_id schoolId, title, content, cpt_name cptName, contact_no contactNo, contractor, cp_status cpStatus, feed_back feedBack, finish_date finishDate, user_name userName, last_update_time lastUpdateTime, stat
+    from t_edu_bd_complaint
+    where stat = 1 and id = #{id}
+  </select>
+  
+  <update id="updateCpStatusByTEduBdComplaintDo">
+    UPDATE 
+        t_edu_bd_complaint
+    SET 
+        cp_status = #{cpStatus}
+    WHERE 
+        stat = 1 and id = #{id}
+  </update>
+  
+  <update id="updateContractorByTEduBdComplaintDo">
+    UPDATE 
+        t_edu_bd_complaint
+    SET 
+        contractor = #{contractor}
+    WHERE 
+        stat = 1 and id = #{id}
+  </update>
+	
+  <update id="updateFeedBackByTEduBdComplaintDo">
+    UPDATE 
+        t_edu_bd_complaint
+    SET 
+        feed_back = #{feedBack}
+    WHERE 
+        stat = 1 and id = #{id}
+  </update>
+	
+  <update id="updateFinishDateByTEduBdComplaintDo">
+    UPDATE 
+        t_edu_bd_complaint
+    SET 
+        finish_date = #{finishDate}
+    WHERE 
+        stat = 1 and id = #{id}
+  </update>
+  
+  <update id="updateLastUpdateTimeByTEduBdComplaintDo">
+    UPDATE 
+        t_edu_bd_complaint
+    SET 
+        last_update_time = #{lastUpdateTime}
+    WHERE 
+        stat = 1 and id = #{id}
+  </update>
+  
+  <select id="getTEduBdComplaintDosBySubDate" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdComplaintDo">
+    select id, create_time createTime, sub_date subDate, school_id schoolId, title, content, cpt_name cptName, contact_no contactNo, contractor, cp_status cpStatus, feed_back feedBack, finish_date finishDate, user_name userName, last_update_time lastUpdateTime, stat
+    from t_edu_bd_complaint
+    where stat = 1 and sub_date between #{startDate} and #{endDate}
+  </select>
+  
+  <select id="getAllTEduBdComplaintDos" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdComplaintDo">
+    select id, create_time createTime, sub_date subDate, school_id schoolId, title, content, cpt_name cptName, contact_no contactNo, contractor, cp_status cpStatus, feed_back feedBack, finish_date finishDate, user_name userName, last_update_time lastUpdateTime, stat
+    from t_edu_bd_complaint
+    where stat = 1
+  </select>
+  
+</mapper>

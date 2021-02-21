@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.saas.TBaseMaterialTypeDoMapper">
+  
+  <select id="getAllMatClassifyIdName" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.TBaseMaterialTypeDo">
+    select distinct id, name
+    from t_base_material_type
+  </select>
+  
+</mapper>

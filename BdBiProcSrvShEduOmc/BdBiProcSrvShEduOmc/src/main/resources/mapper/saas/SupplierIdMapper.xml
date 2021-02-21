@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.saas.SupplierIdDoMapper">
+  
+  <select id="getAllSupplierId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.SupplierIdDo">
+    select distinct supplier_id
+    from t_saas_week_dishes_tmp
+  </select>
+  
+</mapper>

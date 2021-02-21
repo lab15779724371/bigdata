@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edu.TEduDistrictV2DoMapper"> 
+ 
+  <select id="getDistIdNameListByDs1" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edu.TEduDistrictDo">
+    select id, name, stat
+    from t_edu_district
+    where stat = 1
+  </select>
+  
+</mapper>

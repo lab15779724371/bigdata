@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.edubd.TEduBdBriKitStoveDoMapper"> 
+ 
+  <select id="getSchVidSurvInfosBySchId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdBriKitStoveDo">
+    select id, school_id schoolId, school_name schoolName, region_id regionId, camera_id cameraId, vid_src_name vidSrcName, cam_rtsp_inner_net_ip camRtspInnerNetIp, cam_rtsp_outer_net_ip camRtspOuterNetIp, vid_inner_net_rtsp_url vidInnerNetRtspUrl, vid_outer_net_rtsp_url vidOuterNetRtspUrl, cam_rtmp_inner_net_ip camRtmpInnerNetIp, cam_rtmp_outer_net_ip camRtmpOuterNetIp, vid_inner_net_rtmp_url vidInnerNetRtmpUrl, vid_outer_net_rtmp_url vidOuterNetRtmpUrl, stat
+    from t_edu_bd_bri_kit_stove
+    where stat = 1 and school_id = #{schoolId}
+  </select>  
+  
+  <select id="getAllSchVidSurvInfos" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdBriKitStoveDo">
+    select id, school_id schoolId, school_name schoolName, region_id regionId, camera_id cameraId, vid_src_name vidSrcName, cam_rtsp_inner_net_ip camRtspInnerNetIp, cam_rtsp_outer_net_ip camRtspOuterNetIp, vid_inner_net_rtsp_url vidInnerNetRtspUrl, vid_outer_net_rtsp_url vidOuterNetRtspUrl, cam_rtmp_inner_net_ip camRtmpInnerNetIp, cam_rtmp_outer_net_ip camRtmpOuterNetIp, vid_inner_net_rtmp_url vidInnerNetRtmpUrl, vid_outer_net_rtmp_url vidOuterNetRtmpUrl, stat
+    from t_edu_bd_bri_kit_stove
+    where stat = 1
+  </select>
+  
+  <select id="getSchVidSurvInfosByDistId" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.edubd.TEduBdBriKitStoveDo">
+    select id, school_id schoolId, school_name schoolName, region_id regionId, camera_id cameraId, vid_src_name vidSrcName, cam_rtsp_inner_net_ip camRtspInnerNetIp, cam_rtsp_outer_net_ip camRtspOuterNetIp, vid_inner_net_rtsp_url vidInnerNetRtspUrl, vid_outer_net_rtsp_url vidOuterNetRtspUrl, cam_rtmp_inner_net_ip camRtmpInnerNetIp, cam_rtmp_outer_net_ip camRtmpOuterNetIp, vid_inner_net_rtmp_url vidInnerNetRtmpUrl, vid_outer_net_rtmp_url vidOuterNetRtmpUrl, stat
+    from t_edu_bd_bri_kit_stove
+    where stat = 1 and region_id = #{regionId}
+  </select>
+  
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfit.BdBiProcSrvShEduOmc.dao.mapper.saas.TProReserveSampleDoMapper">
+  
+  <select id="getAllRsUnits" resultType="com.tfit.BdBiProcSrvShEduOmc.dao.domain.TProReserveSampleDo">
+    select school_id schoolId, school_name schoolName
+    from t_pro_reserve_sample
+    where stat = 1
+  </select>
+  
+</mapper>
